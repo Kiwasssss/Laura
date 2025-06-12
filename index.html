@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Memórias com Você 💚</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --bege: #f5f5dc;
+    --verde: #1db954;
+    --verde-escuro: #12803c;
+    --sombra: rgba(30, 185, 84, 0.10);
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bege);
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: var(--preto);
+    min-height: 100vh;
+}
+header {
+    position: relative;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+header img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+}
+header h1 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    margin: 0;
+    color: #111;
+    font-family: 'Pacifico',cursive;
+    font-size: 2.5em;
+    text-align: center;
+    text-shadow: 0 2px 12px #fff8;
+    letter-spacing: 2px;
+    z-index: 2;
+}
+.header-gradient-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.0) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+main {
+    max-width: 700px;
+    margin: 0 auto 0 auto;
+    background: var(--branco);
+    border-radius: 0 0 22px 22px;
+    box-shadow: 0 8px 32px var(--sombra);
+    padding: 32px 0 24px 0;
+    position: relative;
+    min-height: 60vh;
+}
+h2 {
+    font-family:'Pacifico',cursive;
+    font-size:2em;
+    text-align:center;
+    color:var(--verde-escuro);
+    margin:36px 0 18px 0;
+}
+.gallery-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--verde-claro);
+    border-radius: 18px;
+    min-height: 60vw;
+    max-height: 70vw;
+    margin-bottom: 10px;
+}
+.gallery-img {
+    width: 100vw;
+    max-width: 430px;
+    height: 60vw;
+    max-height: 70vw;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px var(--sombra);
+    background: var(--branco);
+    user-select: none;
+    touch-action: pan-y;
+    transition: opacity 0.4s;
+}
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.18);
+    border: none;
+    color: #fff;
+    font-size: 2.2em;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.gallery-arrow:hover {
+    background: var(--verde);
+}
+.gallery-arrow.left { left: 10px; }
+.gallery-arrow.right { right: 10px; }
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.gallery-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccefdc;
+    border: 2px solid var(--verde);
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+}
+.gallery-dot.active {
+    background: var(--verde);
+    border: 2px solid var(--verde-escuro);
+}
+.love-timer-box {
+    text-align: center;
+    margin: 32px 0 0 0;
+}
+.love-timer-label {
+    font-size: 1.3em;
+    color: var(--verde-escuro);
+    font-family: 'Quicksand',sans-serif;
+}
+.love-timer-value {
+    font-weight: bold;
+}
+.memory-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin: 36px 0 0 0;
+    padding: 0 24px;
+    list-style: none;
+}
+.memory {
+    background: var(--verde-claro);
+    border-left: 6px solid var(--verde);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px var(--sombra);
+    font-size: 1.15em;
+    position: relative;
+}
+.memory::before {
+    content: "💚";
+    position: absolute;
+    left: -25px;
+    top: 18px;
+    font-size: 1.5em;
+    opacity: 0.7;
+}
+.memory-date {
+    font-size: 0.95em;
+    color: var(--verde-escuro);
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+@media (max-width: 700px) {
+    .box-amo-content { flex-direction: column; align-items: center; gap: 18px; }
+    .box-amo-lista { columns: 1; margin-left: 0; }
+    .box-amo-foto-area { min-width: 0; }
+}
+footer {
+    text-align: center;
+    color: var(--verde-escuro);
+    margin: 40px 0 16px 0;
+    font-size: 1.1em;
+    opacity: 0.7;
+}
+@media (max-width: 800px) {
+    main { padding: 18px 0 24px 0; }
+    .gallery-img { max-width: 98vw; height: 60vw; max-height: 70vw; }
+}
+@media (max-width: 500px) {
+    header h1 { font-size: 1.3em; }
+    main { padding: 10px 0 24px 0; }
+    .gallery-img { max-width: 100vw; height: 60vw; max-height: 70vw; }
+}
+    </style>
+</head>
+<body>
+    
+    <header>
+        
+        <img src="header.png" alt="Header">
+        <h1>Memórias com Você</h1>
+        <div class="header-gradient-divider"></div>
+    </header>
+            <!-- Player estilo Spotify -->
+        <div id="player-spotify" style="
+            width: 340px;
+            max-width: 95vw;
+            margin: 32px auto 24px auto;
+            background: #181818;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #0003;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 22px;
+            color: #fff;
+            font-family: 'Quicksand', Arial, sans-serif;
+            position: relative;
+        ">
+            <img src="capa-musca.jpg" alt="Capa da música" style="width:56px;height:56px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px #0005;">
+            <div style="flex:1;min-width:0;">
+                <div style="font-weight:bold;font-size:1.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                    Linguagem dos Olhos
+                </div>
+                <div style="font-size:0.98em;color:#1db954;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                    Péricles
+                </div>
+                <audio id="musica" src="musica.mp3" autoplay></audio>
+            </div>
+            <button id="btn-play" style="
+                background: #1db954;
+                border: none;
+                border-radius: 50%;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 1.6em;
+                cursor: pointer;
+                box-shadow: 0 2px 8px #0003;
+                transition: background 0.2s;
+            " title="Tocar/Pausar">
+                ▶
+            </button>
+        </div>
+    <main>
+        <h2>Nossos Momentos Especiais</h2>
+        <div class="gallery-slider" id="gallery-slider">
+            <button class="gallery-arrow left" id="arrow-left" aria-label="Anterior">&#8592;</button>
+            <img class="gallery-img" id="gallery-img" src="" alt="Foto">
+            <button class="gallery-arrow right" id="arrow-right" aria-label="Próxima">&#8594;</button>
+        </div>
+        
+        <div class="gallery-dots" id="gallery-dots"></div>
+        <div class="love-timer-box">
+            <span class="love-timer-label">
+                Eu te amo há: <span id="love-timer" class="love-timer-value"></span>
+            </span>
+        </div>
+        <ul class="memory-list">
+            <li class="memory">
+                <div class="memory-date">17/02/2025</div>
+                O primeiro dia que eu olhei para você e percebi que era amor. Desde então, cada dia é especial.
+            </li>
+            <li class="memory">
+                <div class="memory-date">29/03/2024</div>
+                A primeira vez que a gente saiu juntos, aquele café com você foi mágico. A conversa, o olhar, tudo perfeito.
+            </li>
+            <li class="memory">
+                <div class="memory-date">19/04/2025</div>
+                Aquele primeiro piquinique no meio do parque, onde tudo começou. O sol no rosto, a sua risada e aquelas formigas na comida.
+            </li>
+            <li class="memory">
+                <div class="memory-date">12/06/2025</div>
+                O primeiro dia dos namorados que passamos juntos. Espero que aproveite hoje meu amor, porque é só o começo de muitos outros.
+            </li>
+        </ul>
+        <div style="height: 32px;"></div>
+        <img src="Coisas que amo em voce.png" alt="Coisas que amo em você" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="2.png" alt="Imagem 2" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="3.png" alt="Imagem 3" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="4.png" alt="Imagem 4" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="5.png" alt="Imagem 5" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="6.png" alt="Imagem 6" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+        <img src="7.png" alt="Imagem 7" style="display:block;width:100vw;max-width:100%;margin:0;padding:0;position:relative;left:50%;transform:translateX(-50%);">
+
+    </main>
+</main>
+<footer>
+    Feito com 💚 para você<br>
+    <span style="font-size:0.95em;">Kauê & Laura - 2025</span>
+</footer>
+    <script>
+                    // Player simples estilo Spotify
+            const audio = document.getElementById('musica');
+            const btn = document.getElementById('btn-play');
+            let tocando = false;
+
+            btn.onclick = function() {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            };
+
+            audio.addEventListener('play', function() {
+                btn.textContent = '⏸';
+                tocando = true;
+            });
+            audio.addEventListener('pause', function() {
+                btn.textContent = '▶';
+                tocando = false;
+            });
+        // Galeria de imagens com timer e swipe
+        const images = [
+            "img 1.png",
+            "img 2.png",
+            "img 3.png",
+            "img 4.png",
+            "img 5.png"
+        ];
+        let current = 0;
+        let timer = null;
+        const imgEl = document.getElementById('gallery-img');
+        const dotsEl = document.getElementById('gallery-dots');
+        const leftBtn = document.getElementById('arrow-left');
+        const rightBtn = document.getElementById('arrow-right');
+        function showImage(idx) {
+            current = (idx + images.length) % images.length;
+            imgEl.src = images[current];
+            Array.from(dotsEl.children).forEach((dot, i) => {
+                dot.classList.toggle('active', i === current);
+            });
+            resetAutoSlide();
+        }
+        function nextImage() { showImage(current + 1); }
+        function prevImage() { showImage(current - 1); }
+        function resetAutoSlide() {
+            if (timer) clearInterval(timer);
+            timer = setInterval(nextImage, 10000);
+        }
+        // Dots
+        dotsEl.innerHTML = images.map((_, i) =>
+            `<div class="gallery-dot${i === 0 ? ' active' : ''}"></div>`
+        ).join('');
+        Array.from(dotsEl.children).forEach((dot, i) => {
+            dot.addEventListener('click', () => showImage(i));
+        });
+        leftBtn.addEventListener('click', prevImage);
+        rightBtn.addEventListener('click', nextImage);
+        // Swipe para mobile
+        let startX = null;
+        imgEl.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        });
+        imgEl.addEventListener('touchend', e => {
+            if (startX === null) return;
+            let endX = e.changedTouches[0].clientX;
+            if (endX - startX > 40) prevImage();
+            else if (startX - endX > 40) nextImage();
+            startX = null;
+        });
+        // Inicializa
+        showImage(0);
+
+        // Timer "Eu te amo há:" com meses e espaço
+        function updateLoveTimer() {
+            const start = new Date(2025, 1, 14, 0, 0, 0); // 14/02/2025 (mês 1 = fevereiro)
+            const now = new Date();
+
+            // Calcular anos, meses, dias
+            let anos = now.getFullYear() - start.getFullYear();
+            let meses = now.getMonth() - start.getMonth();
+            let dias = now.getDate() - start.getDate();
+            if (dias < 0) {
+                meses--;
+                let prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                dias += prevMonth.getDate();
+            }
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            let horas = now.getHours() - start.getHours();
+            let minutos = now.getMinutes() - start.getMinutes();
+            let segundos = now.getSeconds() - start.getSeconds();
+            if (segundos < 0) { minutos--; segundos += 60; }
+            if (minutos < 0) { horas--; minutos += 60; }
+            if (horas < 0) { dias--; horas += 24; }
+
+            let texto = '';
+            if (anos > 0) texto += anos + (anos === 1 ? " ano, " : " anos, ");
+            if (meses > 0) texto += meses + (meses === 1 ? " mês, " : " meses, ");
+            texto += `${dias} dias, ${horas}h ${minutos}m ${segundos}s`;
+            document.getElementById('love-timer').textContent = texto;
+        }
+        setInterval(updateLoveTimer, 1000);
+        updateLoveTimer();
+    </script>
+</body>
+</html>
